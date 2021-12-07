@@ -36,13 +36,6 @@ public class User extends DateAudit {
     @Size( max = 100 )
     public String password;
 
-//    @ManytoMany(fetch = FetchType.LAZY)
-//    @JoinTable( name = "user_roles",
-//            joinColumns = @JoinColumn( name = "user_id"),
-//            inverseJoinColumns = @JoinColumn( name = "role_id" )
-//    )
-//    public Set<Role> roles = new HashSet<>();
-
     public User() {}
 
     public User(String name, String username, String email, String password) {
