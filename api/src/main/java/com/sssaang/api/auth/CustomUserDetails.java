@@ -32,8 +32,11 @@ public class CustomUserDetails implements UserDetails {
     }
 
     public static CustomUserDetails create(User user) {
-        GrantedAuthority authority = new  new SimpleGrantedAuthority(user.name);
-        return new CustomUserDetails(user.id, user.name, user.username, user.email, user.password, authority);
+        List<GrantedAuthority> authorities =
+                user.roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.name.name()))
+                .collect(Collectors.toList());
+        return new CustomUserDetails(user.id, user.name, user.username, user.email, user.password, authorities);
     }
 
     @Override
