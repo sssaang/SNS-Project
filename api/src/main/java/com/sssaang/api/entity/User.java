@@ -1,6 +1,9 @@
 package com.sssaang.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sssaang.api.entity.audit.DateAudit;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -15,6 +18,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = { "username" }),
         @UniqueConstraint(columnNames = { "email" })
 })
+
 public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
