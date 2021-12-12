@@ -11,6 +11,8 @@ import com.sssaang.api.payload.LoginRequest;
 import com.sssaang.api.payload.SignUpRequest;
 import com.sssaang.api.repository.RoleRepository;
 import com.sssaang.api.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +49,8 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
+    private Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -81,6 +85,7 @@ public class AuthController {
         User user = new User(signUpRequest.name, signUpRequest.username,
                 signUpRequest.email, signUpRequest.password);
 
+        this.logger.info(user.toString());
         user.password = this.passwordEncoder.encode(user.password);
 
         Role userRole = this.roleRepository.findByName(RoleName.ROLE_USER)
